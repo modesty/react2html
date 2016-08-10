@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Modesty Zhang -- Principle Engineer -- @modestyqz
+
+# THANKS
+
+    React.js, node.js, babel, webpack, SASS
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    React.js, node.js, babel, webpack, SASS

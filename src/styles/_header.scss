@@ -1,0 +1,138 @@
+@import "_vars";
+@import "_mixins";
+
+$top-bar-margin: 10px;
+
+header {
+	background-color: transparent;
+
+	.logo {
+		margin: $top-bar-margin 0;
+
+		a {
+			font-size: 36px;
+		}
+
+		img {
+			width: 40px;
+		}
+	}
+
+	.banner-area {
+		margin: $top-bar-margin 0 8px 0;
+		height: 80px;
+		text-align: left;
+		line-height: 80px;
+
+		@include max-screen-md {
+			margin-bottom: 0;
+		}
+	}
+
+	.soc-area {
+		margin: $top-bar-margin 0 10px 0;
+		height: 30px;
+		line-height: 30px;
+	}
+}
+
+.icons-social {
+	display: block;
+	float: right;
+	overflow: hidden;
+	width: 198px;
+	height: 30px;
+
+	a {
+		float: left;
+		transition: all 200ms linear;
+		font-family: 'FontAwesome';
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-size: 16px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		color: #fff;
+		margin-left: 3px;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.icon-facebook {
+	background: #3b5998;
+
+	&:before {
+		content: "\f09a";
+	}
+
+	&:hover {
+		background: transparent;
+		color: #3b5998;
+	}
+}
+
+.icon-twitter {
+	background: #50ABF1;
+
+	&:before {
+		content: "\f099";
+	}
+	&:hover {
+		background: transparent;
+		color: #50ABF1;
+	}
+}
+
+.icon-youtube {
+	background: #C62E24;
+
+	&:before {
+		content: "\f16a";
+	}
+
+	&:hover {
+		background: transparent;
+		color: #C62E24;
+	}
+}
+
+.icon-linkedin {
+	background: #0075AA;
+
+	&:before {
+		content: "\f0e1";
+	}
+
+	&:hover {
+		background: transparent;
+		color: #0075AA;
+	}
+}
+
+.icon-dribbble {
+	background: #ea4c89;
+	&:before {
+		content: "\f17d";
+	}
+	&:hover {
+		background: transparent;
+		color: #ea4c89;
+	}
+}
+
+.icon-rss {
+	background: #F0801E;
+
+	&:before {
+		content: "\f09e";
+	}
+	&:hover {
+		background: transparent;
+		color: #F0801E;
+	}
+}

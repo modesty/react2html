@@ -1,0 +1,109 @@
+@import "_vars";
+
+$break-sm: 480px;
+$break-md: 768px;
+$break-lg: 1024px;
+$break-xl: 1200px;
+
+//screen at least is x-size (inclusive)
+@mixin min-screen-lg {
+	@media (min-width: #{$break-lg}) {
+		@content;
+	}
+}
+
+@mixin min-screen-md {
+	@media (min-width: #{$break-md}){
+		@content;
+	}
+}
+
+@mixin min-screen-sm {
+	@media (min-width: #{$break-sm}) {
+		@content;
+	}
+}
+
+//screen up to x-size (inclusive)
+@mixin max-screen-lg {
+	@media (max-width: #{$break-xl - 1px}) {
+		@content;
+	}
+}
+
+@mixin max-screen-md {
+	@media (max-width: #{$break-lg - 1px}) {
+		@content;
+	}
+}
+
+@mixin max-screen-sm {
+	@media (max-width: #{$break-md - 1px}) {
+		@content;
+	}
+}
+
+
+//all extra large screen sizes
+@mixin screen-xl {
+	@media (min-width: #{$break-xl}) {
+		@content;
+	}
+}
+
+//screen certain size in range
+
+@mixin screen-lg {
+	@media (min-width: #{$break-lg}) and (max-width: #{$break-xl - 1px}) {
+		@content;
+	}
+}
+
+@mixin screen-md {
+	@media (min-width: #{$break-md}) and (max-width: #{$break-lg - 1px}) {
+		@content;
+	}
+}
+
+@mixin screen-sm {
+	@media (min-width: #{$break-sm}) and (max-width: #{$break-md - 1px}) {
+		@content;
+	}
+}
+
+// all extra small screen sizes
+@mixin screen-xs {
+	@media (max-width: #{$break-sm - 1px}) {
+		@content;
+	}
+}
+
+////////////////////////////////
+//should be handled by css auto-prefixer
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin box-sizing($box-mode) {
+	-moz-box-sizing: $box-mode;
+	-webkit-box-sizing: $box-mode;
+	box-sizing: $box-mode;
+}
+
+@mixin bk-clip-border-box() {
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+}
+
+@mixin plain-anchor() {
+	color: $color-darkest;
+
+	&:hover, &:visited {
+		color: $color-darkest;
+		text-decoration: none;
+	}
+}
