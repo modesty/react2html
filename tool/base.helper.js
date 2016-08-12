@@ -51,15 +51,12 @@ function parseAndPrepareDirs(pageFile, propFile, srcFolder, destFolder) {
 		mkdirp(path.join(destFolder, relPath));
 	}
 
-	let retVal = {pageFile, propFile, srcFolder, destFolder: destFolder + path.sep + path.basename(pageFile, '.js')};
-	if (relPath.length > 1) {
-		retVal.pageFile = path.basename(pageFile);
-		retVal.propFile = retVal.propFile ? retVal.propFile + relPath : null;
-		retVal.srcFolder = retVal.srcFolder + relPath;
-		retVal.destFolder = destFolder + relPath;
-	}
-
-	return retVal;
+	return {
+		pageFile: path.basename(pageFile),
+		propFile: propFile ? relPath + path.sep + propFile: null,
+		srcFolder: srcFolder + relPath,
+		destFolder: path.normalize( destFolder + relPath + path.sep + path.basename(pageFile, '.js') )
+	};
 }
 
 function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
