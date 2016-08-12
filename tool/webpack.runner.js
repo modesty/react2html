@@ -38,7 +38,7 @@ function compilerCallback(err, stats) {
 	let jsonStats = stats.toJson(statsOptions);
 
 	if (jsonStats.errors.length > 0) {
-		jsonStats.errors.map(error => console.log(`Webpack - v${jsonStats.version} - error: ${error}`.red));
+		jsonStats.errors.map(error => console.log(`✗ Error: Webpack - v${jsonStats.version} - : ${error}`.red));
 		return 2;
 	}
 
