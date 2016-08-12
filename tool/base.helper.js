@@ -43,7 +43,27 @@ function outputOnePage(content, destFolder) {
 	});
 }
 
+function parseAndPrepareDirs(pageFile, propFile, srcFolder, destFolder) {
+	let pathParts = pageFile.split(path.sep);
+	let relPath = "";
+	for (let i = 0; i < pathParts.length - 1; i++) {
+		relPath = relPath + path.sep + pathParts[i];
+		mkdirp(path.join(destFolder, relPath));
+	}
+
+	let retVal = {pageFile, propFile, srcFolder, destFolder: destFolder + path.sep + path.basename(pageFile, '.js')};
+	if (relPath.length > 1) {
+		retVal.pageFile = path.basename(pageFile);
+		retVal.propFile = retVal.propFile ? retVal.propFile + relPath : null;
+		retVal.srcFolder = retVal.srcFolder + relPath;
+		retVal.destFolder = destFolder + relPath;
+	}
+
+	return retVal;
+}
+
 function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
+
 	const file = path.join(srcFolder, pageFile);
 	let Component = require(file);
 
@@ -71,11 +91,14 @@ function transformDefaultPage() {
 }
 
 function transformLinkedPage(filename) {
-	transformOnePage(filename, null, Conf.src.js_path + "/pages", Conf.target.path + "/" + path.basename(filename, '.js'));
+	const {pageFile, propFile, srcFolder, destFolder} = parseAndPrepareDirs(filename,
+		null, Conf.src.js_path + "/pages", Conf.target.path);
+
+	transformOnePage(pageFile, propFile, srcFolder, destFolder);
 }
 
 function transformLinkedPages() {
-	glob("*.js", {cwd: Conf.src.js_path + "/pages"}, function(err, files) {
+	glob("**/*.js", {cwd: Conf.src.js_path + "/pages"}, function(err, files) {
 		if (err) {
 			console.error("Error - ", err);
 		}
