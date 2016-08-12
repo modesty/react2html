@@ -29,7 +29,7 @@ function startLiveServer() {
 function outputOnePage(content, destFolder) {
 	mkdirp(destFolder, err => {
 		if (err) {
-			console.error('Error', err)
+			console.log('✗ Error: outputOnePage'.underline.maroon, err);
 		}
 		else {
 			let outPath = path.join(destFolder, "index.html");
@@ -65,7 +65,7 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
 	let Component = require(file);
 
 	if (!Component) {
-		console.error('Error: No component found at'.underline.maroon, file);
+		console.log('✗ Error: No component found at'.underline.maroon, file);
 		return;
 	}
 
@@ -97,7 +97,7 @@ function transformLinkedPage(filename) {
 function transformLinkedPages() {
 	glob("**/*.js", {cwd: Conf.src.js_path + "/pages"}, function(err, files) {
 		if (err) {
-			console.error("Error - ", err);
+			console.log("✗ Error: transformLinkedPages".underline.maroon, err);
 		}
 		else {
 			files.forEach( filename => {

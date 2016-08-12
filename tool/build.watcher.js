@@ -67,7 +67,7 @@ function _handleRemovedFile(f) {
 		let relPath = _getRelativePath(f);
 		fs.unlink(path.join(Conf.target.path, relPath), (err) => {
 			if (err) {
-				console.error(`error when deleting ${relPath}`, err);
+				console.log(`✗ Error: when deleting ${relPath}`, err);
 			}
 			else {
 				console.log(`file deleted: ${relPath}`);
@@ -81,7 +81,7 @@ function _handleRemovedFile(f) {
 		let targetFile = path.basename(f, ".js") + ".html";
 		fs.unlink(path.join(Conf.target.path, targetFile), (err) => {
 			if (err) {
-				console.error(`error when deleting ${targetFile}`, err);
+				console.log(`✗ Error: when deleting ${targetFile}`, err);
 			}
 			else {
 				console.log(`file deleted: ${targetFile}`);
@@ -90,16 +90,20 @@ function _handleRemovedFile(f) {
 	}
 }
 
+let _server_running = false;
 watch.watchTree(Conf.src.path, {
 	ignoreDotFiles: true,
 	ignoreUnreadableDir: true,
 	ignoreNotPermitted: true,
 	ignoreDirectoryPattern: /\/client\//i,
-	interval: 500,
+	interval: 500
 	}, function (f, curr, prev) {
 		if (typeof f == "object" && prev === null && curr === null) {
 			console.log("watcher: finished walking the source tree".underline.magenta);
-			Runner.watchCompile( helper.startLiveServer );
+			if (!_server_running) {
+				_server_running = true;
+				Runner.watchCompile(helper.startLiveServer);
+			}
 		} else if (prev === null) {
 			console.log("\nwatcher: new file:", path.basename(f));
 			_handleChangedFile(f);
