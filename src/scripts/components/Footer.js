@@ -11,7 +11,7 @@ const Footer = ({rel}) => {
         <div className="footer-left">
           <h3>React<span> 2 HTML</span></h3>
           <p className="footer-links">
-            {model.siteLinks.map( l => (<span><a href={l.href} key={l.name}>{l.name}</a> · </span>))}
+            {model.siteLinks.map( l => (<span key={l.name}><a href={l.href}>{l.name}</a> · </span>))}
           </p>
           <p className="footer-company-name">{model.copyRight}</p>
         </div>
