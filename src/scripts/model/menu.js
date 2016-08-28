@@ -19,7 +19,8 @@ const MenuModel = [
 		{name: "Contact Us", href: "#"},
 		{name: "Schedule a Visit", href: "#"}
 	]},
-	{name: 'About Us', href: "./about/"}
+	{name: 'About Us', href: "./about/"},
+	{name: 'Contact Us', href: "./contact/"}
 ];
 
 export default function processRelPath(rel) {

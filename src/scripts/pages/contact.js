@@ -10,18 +10,18 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 
-class About extends React.Component {
+class Contact extends React.Component {
 	render() {
-		let pageTitle = `About Us`;
+		let pageTitle = `Contact Us`;
 		return (
 			<html className="no-js" lang="en">
 			<Head title={pageTitle} description={pkg.description} styles={Conf.styles} scripts={Conf.scripts} rel="../"/>
 
-			<body className='page-about container-fluid top-container'>
+			<body className='container-fluid'>
 			<Header title={pageTitle} rel="../"/>
 			<Main>
-				<h1>About React2Html</h1>
-				<p>More details can be found at <a href="https://github.com/modesty/react2html"> GitHub </a></p>
+				<h1>React2Html</h1>
+				<p>email the author: <a href="mailto:modestyz@hotmail.com?subject=About%20CoeProject%20Article">modestyz@hotmail.com</a></p>
 			</Main>
 			<Footer rel="../"/>
 			</body>
@@ -30,5 +30,4 @@ class About extends React.Component {
 	}
 }
 
-export default About;
-
+export default Contact;

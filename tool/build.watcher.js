@@ -11,6 +11,7 @@ import Runner from './webpack.runner';
 
 const copyFileExt = /\.(gif|jpg|jpeg|svg|png|ico|xml|txt)$/i;
 const pageFileExt = /\.(js)$/i;
+const build_all_triggers = ['components/', 'issues/', 'model/'];
 
 // 0: ignore; 1: asset file; 2: index page file; 3: linked page file; 4: component file
 function _getFileType(f) {
@@ -29,7 +30,7 @@ function _getFileType(f) {
 		else if (f.indexOf('pages/') > 0) {
 			retVal = 3;
 		}
-		else if (f.indexOf('components/') > 0) {
+		else if (build_all_triggers.filter( t => f.indexOf(t) > 0).length > 0) {
 			retVal = 4;
 		}
 	}
@@ -97,21 +98,21 @@ watch.watchTree(Conf.src.path, {
 	ignoreNotPermitted: true,
 	ignoreDirectoryPattern: /\/client\//i,
 	interval: 500
-	}, function (f, curr, prev) {
-		if (typeof f == "object" && prev === null && curr === null) {
-			console.log("watcher: finished walking the source tree".underline.magenta);
-			if (!_server_running) {
-				_server_running = true;
-				Runner.watchCompile(helper.startLiveServer);
-			}
-		} else if (prev === null) {
-			console.log("\nwatcher: new file:", path.basename(f));
-			_handleChangedFile(f);
-		} else if (curr.nlink === 0) {
-			console.log("\nwatcher: file removed:", path.basename(f));
-			_handleRemovedFile(f);
-		} else {
-			console.log("\nwatcher: file changed:", path.basename(f));
-			_handleChangedFile(f);
+}, function (f, curr, prev) {
+	if (typeof f == "object" && prev === null && curr === null) {
+		console.log("watcher: finished walking the source tree".underline.magenta);
+		if (!_server_running) {
+			_server_running = true;
+			Runner.watchCompile(helper.startLiveServer);
 		}
-	});
+	} else if (prev === null) {
+		console.log("\nwatcher: new file:", path.basename(f));
+		_handleChangedFile(f);
+	} else if (curr.nlink === 0) {
+		console.log("\nwatcher: file removed:", path.basename(f));
+		_handleRemovedFile(f);
+	} else {
+		console.log("\nwatcher: file changed:", path.basename(f));
+		_handleChangedFile(f);
+	}
+});
