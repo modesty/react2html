@@ -5,7 +5,7 @@ const FooterModel = {
 		{name: "About", href: "./about"},
 		{name: "Legal", href: "#"},
 		{name: "Privacy", href: "#"},
-		{name: "Contact", href: "#"}
+		{name: "Contact", href: "./contact"}
 	],
 	socials:[
 		{id: "icon-facebook", href: "http://facebook.com"},
