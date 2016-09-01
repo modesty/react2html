@@ -10,34 +10,32 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
-class Root extends React.Component {
-	render() {
-		let pageTitle = `Welcome to ${pkg.name} v${pkg.version}`;
-		return (
-			<html className="no-js" lang="en">
-				<Head title={pageTitle} description={pkg.description} styles={Conf.styles} scripts={Conf.scripts}/>
+const Root = () => {
+	let pageTitle = `Welcome to ${pkg.name} v${pkg.version}`;
+	return (
+		<html className="no-js" lang="en">
+			<Head title={pageTitle} description={pkg.description} styles={Conf.styles} scripts={Conf.scripts}/>
 
-				<body className='page-index container-fluid top-container'>
-				<Header title={pageTitle} />
-				<Main>
-					<div className="row">
-						<aside className="col-md-2 hidden-sm hidden-xs">
-							<p>sider content</p>
-						</aside>
-						<section className="col-md-8">
-							<p>Main content</p>
-						</section>
-						<aside className="col-md-2 hidden-sm hidden-xs">
-							<p>side bar content</p>
-						</aside>
-					</div>
-				</Main>
-				<Footer />
-				</body>
-			</html>
-		)
-	}
-}
+			<body className='page-index container-fluid top-container'>
+			<Header title={pageTitle} />
+			<Main>
+				<div className="row">
+					<aside className="col-md-2 hidden-sm hidden-xs">
+						<p>sider content</p>
+					</aside>
+					<section className="col-md-8">
+						<p>Main content</p>
+					</section>
+					<aside className="col-md-2 hidden-sm hidden-xs">
+						<p>side bar content</p>
+					</aside>
+				</div>
+			</Main>
+			<Footer />
+			</body>
+		</html>
+	);
+};
 
 export default Root;
 
