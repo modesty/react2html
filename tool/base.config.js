@@ -41,14 +41,14 @@ const Config = {
 		'//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js',
 		'//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js',
 		'//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js',
-		'scripts/' + JS_BUNDLE_NAME
+		'scripts/' + JS_BUNDLE_NAME + "?ver=" + pkg.version
 	],
 	styles: [
 		'//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css',
 		'//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
 		'//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
 		'//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css',
-		'styles/' + CSS_BUNDLE_NAME
+		'styles/' + CSS_BUNDLE_NAME + "?ver=" + pkg.version
 	]
 };
 
