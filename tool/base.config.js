@@ -14,6 +14,7 @@ const JS_BUNDLE_NAME = APP_NAME + "-bundle.js";
 
 const Config = {
 	CUR_DIR,
+	TRACK_ID: "UA-xxxxxxxx-1",
 	APP_NAME,
 	SRC_BASE,
 	TAR_BASE,

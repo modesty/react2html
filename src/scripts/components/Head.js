@@ -17,7 +17,7 @@ const Head = ({title, description, styles, scripts, rel}) => {
 			<link rel="apple-touch-icon" href={touchHref} />
 
 			{styleLinks.map( (s, i) => <link rel="stylesheet" href={s} key={i} /> )}
-			{scriptLinks.map( (s, i) => <script src={s} key={i} /> )}
+			{scriptLinks.map( (s, i) => <script async src={s} key={i} /> )}
 		</head>
 	);
 };
