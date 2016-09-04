@@ -11,6 +11,13 @@ import liveServer from 'live-server';
 
 import Conf from './base.config';
 
+const gaCode = `<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '${Conf.TRACK_ID}', 'auto');ga('send', 'pageview');</script>`;
+const pageEnds = "</body></html>";
+
+function appendGATrackCode(content) {
+	return content.slice(0, content.lastIndexOf(pageEnds)) + gaCode + pageEnds;
+}
+
 function startLiveServer() {
 	let params = {
 		port: 8181, // Set the server port. Defaults to 8080.
@@ -36,7 +43,7 @@ function outputOnePage(content, destFolder) {
 			let outStream = fs.createWriteStream(outPath);
 			outStream.once('open', () => {
 				outStream.write('<!doctype html>\r\n');
-				outStream.write(content);
+				outStream.write(appendGATrackCode(content));
 				outStream.end();
 			});
 		}
