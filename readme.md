@@ -149,6 +149,8 @@ When site is rebuilt, browser will auto-reload the updated file.
 
 When source tree structure or out put folder/file name needs customized, just update `tool\base.config.js`. Compiled bundle file name and CDN loaded libraries are also configured in the same file.
 
+More details can be found at [Build Component Based Website](http://www.codeproject.com/Articles/1119961/Build-Component-Based-Website).
+
 ## Contribution
 
 Participating in this project, you are expected to honor [open code of conduct](http://todogroup.org/opencodeofconduct/#Open+Code+of+Conduct/abuse@todogroup.org).

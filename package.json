@@ -1,6 +1,6 @@
 {
   "name": "react2html",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "react2html - component based web site development starter kit",
   "private": false,
   "homepage": "https://github.com/modesty/react2html",
@@ -26,7 +26,7 @@
     "Static React Site"
   ],
   "engines": {
-    "node": ">=4.4.7"
+    "node": ">=4.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -39,7 +39,7 @@
     "babel-preset-stage-1": "^6.13.0",
     "babel-register": "^6.14.0",
     "colors": "^1.1.2",
-    "css-loader": "^0.24.0",
+    "css-loader": "^0.25.0",
     "eslint": "^3.4.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.2.0",
@@ -50,12 +50,12 @@
     "live-server": "^1.1.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.14.1",
-    "node-sass": "^3.8.0",
-    "npm-run-all": "^3.0.0",
+    "node-sass": "^3.9.3",
+    "npm-run-all": "^3.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0",
-    "sass-loader": "^4.0.0",
+    "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
     "watch": "^0.19.2",
     "webpack": "^1.13.2"
