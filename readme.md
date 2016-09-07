@@ -1,8 +1,10 @@
 # react2html
 
-React2Html is a component based web site starter kit and build tool, built with ReactJS, SASS, Babel, WebPack and Node.js.
+React2Html is a component based web site starter kit and build tool. It enables build-time data-driven reusable components for building multi-page website with compsability and efficiency, powered by ReactJS, SASS, Babel, WebPack and Node.js.
 
 [Component Based Web Application](http://www.codeproject.com/Articles/1045800/Component-Based-Web-Application) prompts data-driven reusable components for developing web applications. React2Html is a starter kit and build tool to enable component based development for web sites: [static web site or service oriented HTML application](http://www.codeproject.com/Articles/118683/SOHA-Service-Oriented-HTML-Application-Concepts-an) can utilize the same data driven reusable component model to improve the effectiveness of site development and updates.   
+
+React2Html originates from the need to address some [challengues from SPA](https://en.wikipedia.org/wiki/Single-page_application) when building a content-driven website, like multi-page navigation, page level SEO, UX tracking, together with consistent look and feel, sharable component among pages, compatible with different client side JavaScript frameworks, quick updates and deployment, etc. More discussions can be found at [Build Component Based Website](http://www.codeproject.com/Articles/1119961/Build-Component-Based-Website). It enables website development starting with reusables components and data models, through an automated build process, generates optimized HTML that is deployment-ready. 
 
 If you are facing some of the following challenges building a web site, React2Html is here to help:
 
@@ -12,14 +14,15 @@ If you are facing some of the following challenges building a web site, React2Ht
 * Consistent and effective way to minimizing, packaging and uglifying HTML, CSS and JavaScript
 * Static web site development needs to apply "separation of concerns" and DRY (Don't Repeat Yourself) philosophies
 * Architecturally, web site development needs to be data driven through reusable components' compositions
+* Existing web pages uses different client side JavaScript frameworks that needs common functionalities, like header, footer, page layout, etc.
 
-With React2Html, a multi-page static site can be built by composing reusable React components, and component generates HTML with data models through build process. Runtime model update (user interactions or Ajax) and rendering through Virtual DOM has been covered very well in [React.js](https://facebook.github.io/react/), it's optional with React2HTML: in addition to 'react to changes' at run time, React2Html focus on build-time component re-usability.    
+With React2Html, a multi-page static site can be built by composing reusable [functional stateless components](https://medium.com/@joshblack/stateless-components-in-react-0-14-f9798f8b992d#.cs1rly9bv), then generates HTML with data models through build process. Runtime model update (user interactions or Ajax) and rendering through Virtual DOM has been covered very well in [React.js](https://facebook.github.io/react/), it's optional with React2HTML: in addition to 'react to changes' at run time, React2Html focus on build-time component re-usability.    
 
-React2Html prompts 'component thinking': the building blocks should be component, rather than actual HTML tags.
+React2Html prompts 'component thinking': the building blocks should be stateless component, includes SASS modules for CSS, rather than raw HTML tags and CSS rules.
 
 ## How it works
 
-With React2Html, [React component](https://facebook.github.io/react/docs/component-api.html) replaces [HTML template](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template), all HTML markups are generated from component. Style sheets are modularized by [SASS](http://sass-lang.com/), JavaScript is written in [ES6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), both SASS and ES6 code are compiled into single bundle separately through [babel](https://babeljs.io/) and [webpack](https://webpack.github.io/). Everything comes together when build script runs, it scans the source code tree per configurations, generating main index.html in the root, also creating sub-directories for each page files, copy over all assets files to the relative path, calling webpack and its plugins to bundle ES5 JavaScript and CSS, and put everything to `target` folder. (configurable)
+With React2Html, [functional stateless components](https://medium.com/@joshblack/stateless-components-in-react-0-14-f9798f8b992d#.cs1rly9bv) replaces [HTML template](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template), all HTML markups are generated from component. Style sheets are modularized by [SASS](http://sass-lang.com/), JavaScript is written in [ES6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), both SASS and ES6 code are compiled into single bundle separately through [babel](https://babeljs.io/) and [webpack](https://webpack.github.io/). Everything comes together when build script runs, it scans the source code tree per configurations, generating main index.html in the root, also creating sub-directories for each page files, copy over all assets files to the relative path, calling webpack and its plugins to bundle ES5 JavaScript and CSS, and put everything to `target` folder. (configurable)
 
 For example, the source tree looks like this:
 
