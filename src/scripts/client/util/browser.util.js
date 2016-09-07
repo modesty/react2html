@@ -1,5 +1,8 @@
 'use strict';
 
+/*global ga*/
+/*eslint no-undef: "error"*/
+
 function getQueryStringParamByName(name, url) {
 	if (!url)
 		url = window.location.href;
@@ -14,7 +17,19 @@ function getQueryStringParamByName(name, url) {
 	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function trackEvent(evtCategory, evtAction, evtLabel, evtValue) {
+	if (typeof(ga) === "function") {
+		ga('send', {
+			hitType: 'event',
+			eventCategory: evtCategory || 'unknown',
+			eventAction: evtAction || 'click',
+			eventLabel: evtLabel,
+			eventValue: evtValue
+		});
+	}
+}
 
 module.exports = {
-	getQueryStringParamByName
+	getQueryStringParamByName,
+	trackEvent
 };
