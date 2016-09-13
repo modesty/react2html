@@ -146,7 +146,7 @@ For production build, run:
 
 React2Html comes with two watchers built-in: one for static asset files and WebPack watcher for SASS and JavaScripts. Whenever assets files changes, it'll be reflected in `target` folder automatically; Whenever SCSS or JavaScript changes, corresponding component/pages/bundles will be rebuilt and re-deployed.
 
-When site is rebuilt, browser will auto-reload the updated file. 
+When site is rebuilt, browser will auto-reload the updated file. (fixed in v0.1.4)
 
 ## Customization
 

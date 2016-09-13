@@ -21,13 +21,13 @@ const Root = () => {
 			<Main>
 				<div className="row">
 					<aside className="col-md-2 hidden-sm hidden-xs">
-						<p>left side content</p>
+						<p>left side</p>
 					</aside>
 					<section className="col-md-8">
 						<p>Main content</p>
 					</section>
 					<aside className="col-md-2 hidden-sm hidden-xs">
-						<p>right side content</p>
+						<p>right side</p>
 					</aside>
 				</div>
 			</Main>
