@@ -21,24 +21,19 @@ function appendGATrackCode(content) {
 
 function startLiveServer() {
 	let svcDir = "." + Conf.TAR_BASE;
+	let watchFiles = [`${svcDir}/**/index.html`, `${svcDir}/**/*.css`, `${svcDir}/**/*.js`];
 	let params = {
 		port: 8181, // Set the server port. Defaults to 8080.
 		localOnly: true, // Support environments where dynamic hostnames are not required (ie: electron)
 		server: {
 			baseDir: svcDir
 		},
-		//files: ["./target/**/*.*"], // Browsersync can watch your files as you work. Changes you make will either be injected into the page (CSS & images) or will cause all browsers to do a full-page refresh.
-		reloadDelay: 1000, //Wait for 1 second before any browsers should try to inject/reload a file.
-		reloadDebounce: 1000 // Wait 1 second after a reload event before allowing more.
+		files: watchFiles, // Browsersync can watch your files as you work. Changes you make will either be injected into the page (CSS & images) or will cause all browsers to do a full-page refresh.
+		reloadDelay: 1000 //Wait for 1 second before any browsers should try to inject/reload a file.
 	};
 
 	let bs = browserSync.create(Conf.APP_NAME);
-	bs.init(params, function() {
-		let bsServer = browserSync.get(Conf.APP_NAME);
-		bsServer.watch([`${svcDir}/**/index.html`, `${svcDir}/**/*.css`, `${svcDir}/**/*.js`]).on('change', function() {
-			bsServer.reload();
-		});
-	});
+	bs.init(params);
 }
 
 function outputOnePage(content, destFolder) {
@@ -78,6 +73,7 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
 
 	const file = path.join(srcFolder, pageFile);
 	let Component = require(file);
+	delete require.cache[require.resolve(file)]; //force to invalidate the cache for changed file
 
 	if (!Component) {
 		console.log('✗ Error: No component found at'.underline.maroon, file);
