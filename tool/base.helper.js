@@ -7,30 +7,38 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 import mkdirp from 'mkdirp';
-import liveServer from 'live-server';
 
 import Conf from './base.config';
 
 const gaCode = `<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '${Conf.TRACK_ID}', 'auto');ga('send', 'pageview');</script>`;
 const pageEnds = "</body></html>";
 
+let browserSync = require('browser-sync');
+
 function appendGATrackCode(content) {
 	return content.slice(0, content.lastIndexOf(pageEnds)) + gaCode + pageEnds;
 }
 
 function startLiveServer() {
+	let svcDir = "." + Conf.TAR_BASE;
 	let params = {
 		port: 8181, // Set the server port. Defaults to 8080.
-		host: "127.0.0.1", // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
-		root: "./target", // Set root directory that's being server. Defaults to cwd.
-		open: true, // When false, it won't load your browser by default.
-		//ignore: 'scss,my/templates', // comma-separated string for paths to ignore
-		file: "index.html", // When set, serve this file for every 404 (useful for single-page applications)
-		wait: 1000, // Waits for all changes, before reloading. Defaults to 0 sec.
-		//mount: [['/components', './node_modules']], // Mount a directory to a route.
-		logLevel: 2 // 0 = errors only, 1 = some, 2 = lots
+		localOnly: true, // Support environments where dynamic hostnames are not required (ie: electron)
+		server: {
+			baseDir: svcDir
+		},
+		//files: ["./target/**/*.*"], // Browsersync can watch your files as you work. Changes you make will either be injected into the page (CSS & images) or will cause all browsers to do a full-page refresh.
+		reloadDelay: 1000, //Wait for 1 second before any browsers should try to inject/reload a file.
+		reloadDebounce: 1000 // Wait 1 second after a reload event before allowing more.
 	};
-	liveServer.start(params);
+
+	let bs = browserSync.create(Conf.APP_NAME);
+	bs.init(params, function() {
+		let bsServer = browserSync.get(Conf.APP_NAME);
+		bsServer.watch([`${svcDir}/**/index.html`, `${svcDir}/**/*.css`, `${svcDir}/**/*.js`]).on('change', function() {
+			bsServer.reload();
+		});
+	});
 }
 
 function outputOnePage(content, destFolder) {
