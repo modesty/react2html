@@ -38,13 +38,13 @@ function compilerCallback(err, stats) {
 	let jsonStats = stats.toJson(statsOptions);
 
 	if (jsonStats.errors.length > 0) {
-		jsonStats.errors.map(error => console.log(`✗ Error: Webpack - v${jsonStats.version} - : ${error}`.red));
+		jsonStats.errors.map(error => console.log(`✗ Error: Webpack - v${jsonStats.version} - : ${error}`.bold.red));
 		return 2;
 	}
 
 	if (jsonStats.warnings.length > 0) {
 		console.log('Webpack generated the following warnings: '.bold.yellow);
-		jsonStats.warnings.map(warning => console.log(warning.yellow));
+		jsonStats.warnings.map(warning => console.log(warning.bold.yellow));
 	}
 
 	console.log(`\n=== Webpack v${jsonStats.version} - ${jsonStats.hash} - ${jsonStats.time}ms\n`.green);
