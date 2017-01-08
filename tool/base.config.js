@@ -47,7 +47,7 @@ const Config = {
 	styles: [
 		'//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css',
 		'//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
-		'//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
+		'//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
 		'//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css',
 		'styles/' + CSS_BUNDLE_NAME + "?ver=" + pkg.version
 	]
