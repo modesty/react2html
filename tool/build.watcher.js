@@ -6,7 +6,7 @@ import watch from 'watch';
 import colors from 'colors';
 
 import Conf from './base.config';
-import helper from './base.helper';
+import helper from './base.copier';
 import Runner from './webpack.runner';
 
 const copyFileExt = /\.(gif|jpg|jpeg|svg|png|ico|xml|txt)$/i;

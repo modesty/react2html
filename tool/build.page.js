@@ -1,8 +1,13 @@
-import helper from './base.helper';
+import Conf from './base.config';
+import helper from './build.transform';
+
+function transformDefaultPage() {
+	helper.transformOnePage('index.js', null, Conf.src.js_path, Conf.target.path);
+}
 
 function main() {
-	helper.transformDefaultPage();
-	helper.transformLinkedPages();
+	transformDefaultPage();
+	// helper.transformLinkedPages();
 }
 
 main();

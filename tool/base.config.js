@@ -23,7 +23,9 @@ const Config = {
 		js_path: CUR_DIR + SRC_BASE + "/scripts",
 		js_entry: CUR_DIR + SRC_BASE + "/scripts/main.js",
 		sass_path: CUR_DIR + SRC_BASE + "/styles",
-		img_path: CUR_DIR + SRC_BASE + "/images"
+		img_path: CUR_DIR + SRC_BASE + "/images",
+		vendor_css: CUR_DIR + VENDOR_BASE + "/css",
+		vendor_js:  CUR_DIR + VENDOR_BASE + "/js"
 	},
 	target: {
 		path: CUR_DIR + TAR_BASE,
@@ -34,9 +36,7 @@ const Config = {
 		img_path: CUR_DIR + TAR_BASE + "/img"
 	},
 	root_files: "*(*.png|*.xml|*.ico|*.txt|*.html|.htaccess|site.webmanifest)",
-	image_files: ['**/*.jp*g', '**/*.png', '**/*.gif', '**/*.svg'],
-	vendor_css: CUR_DIR + VENDOR_BASE + "/css",
-	vendor_js: CUR_DIR + VENDOR_BASE + "/js"
+	image_files: ['**/*.jp*g', '**/*.png', '**/*.gif', '**/*.svg']
 };
 
 export default Config;
