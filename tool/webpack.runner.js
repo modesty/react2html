@@ -6,7 +6,7 @@ import webpack from 'webpack';
 import colors from 'colors';
 
 import Conf from './base.config';
-import helper from './base.helper';
+import helper from './base.copier';
 import webpackConfigBuilder from './webpack.config';
 
 process.env.NODE_ENV = 'production'; // this assures React is built in prod mode and that the Babel dev config doesn't apply.

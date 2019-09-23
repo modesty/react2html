@@ -1,7 +1,15 @@
 import fs from 'fs-extra';
 
 import Conf from './base.config';
-import helper from './base.helper';
+import helper from './base.copier';
+
+function copyOneFile(fileName) {
+	const job = `build resources: copy ${fileName}`;
+	console.log(`☯︎ start ${job} ...`);
+	fs.copy(`${Conf.src.path}/${fileName}`, `${Conf.target.path}/${fileName}`, err => {
+		console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job}`);
+	});
+}
 
 function copyMetaFiles() {
 	const job = "build resources: copy meta files";
@@ -23,18 +31,24 @@ function copyResources() {
 	});
 }
 
+function copyVendorAsset() {
+	const job = "build resources: copy vendor files";
+	console.log(`☯︎ start ${job} ...`);
+
+	helper.copyWildCard('**/*.css', Conf.src.vendor_css, Conf.target.css_path, err => {
+		console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job}`);
+	});
+
+	helper.copyWildCard('**/*.js', Conf.src.vendor_js, Conf.target.js_path, err => {
+		console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job}`);
+	});
+}
+
 function main() {
-	// const apacheHta = '.htaccess';
-	// fs.copy(`${Conf.src.path}/${apacheHta}`, `${Conf.target.path}/${apacheHta}`, err => {
-	// 	if (err) {
-	// 		console.log("✗ Error: copy .htaccess:".underline.maroon, err);
-	// 	}
-	// 	else {
-	// 		console.log(`copied file: ${apacheHta}`);
-	// 	}
-	// });
+	copyOneFile('.htaccess');
 	copyMetaFiles();
 	copyResources();
+	copyVendorAsset();
 }
 
 main();

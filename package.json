@@ -45,11 +45,11 @@
     "webpack-dev-server": "^3.8.1"
   },
   "scripts": {
-    "clean-target": "babel-node ./tool/build.cleanup.js",
+    "clean:target": "babel-node ./tool/build.cleanup.js",
     "build:asset": "babel-node ./tool/build.asset.js",
     "build:page": "babel-node ./tool/build.page.js",
     "build:bundle": "babel-node ./tool/build.bundle.js",
-    "build:watch": "npm run clean-target; npm run build:asset; npm run build:page; npm run watcher;",
+    "build:watch": "npm run clean:target; npm run build:asset; npm run build:page; npm run watcher;",
     "build": "npm run clean-target; npm-run-all --parallel build:asset build:page build:bundle",
     "build:prod": "webpack --mode production",
     "start": "webpack-dev-server --open --mode development"
