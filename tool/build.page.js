@@ -1,5 +1,3 @@
-"use strict";
-
 import helper from './base.helper';
 
 function main() {

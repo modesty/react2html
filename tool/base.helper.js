@@ -1,5 +1,3 @@
-"use strict";
-
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
@@ -12,8 +10,6 @@ import Conf from './base.config';
 
 const gaCode = `<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '${Conf.TRACK_ID}', 'auto');ga('send', 'pageview');</script>`;
 const pageEnds = "</body></html>";
-
-let browserSync = require('browser-sync');
 
 function appendGATrackCode(content) {
 	return content.slice(0, content.lastIndexOf(pageEnds)) + gaCode + pageEnds;
