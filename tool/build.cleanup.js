@@ -1,22 +1,12 @@
-"use strict";
-
 import fs from 'fs-extra';
-import colors from 'colors';
 
 import Conf from './base.config';
 
 function emptyTarget() {
-	console.log("pre-build: empty target directory ...".underline.magenta);
+	const job = "empty target directory";
+	console.log(`☯︎ start: ${job} ...`);
 
-	//Ensures that a directory is empty. Deletes directory contents if the directory is not empty. If the directory does not exist, it is created. The directory itself is not deleted.
-	fs.emptyDir(Conf.target.path,  err => {
-		if (err) {
-			console.log("✗ Error: emptyTarget:".underline.maroon, err);
-		}
-		else {
-			console.log('✓ Success: ' + Conf.target.path + " is cleaned up.")
-		}
-	});
+	fs.emptyDir(Conf.target.path,  err => console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job} \n\n`));
 }
 
 function main() {

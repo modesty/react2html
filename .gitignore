@@ -1,5 +1,6 @@
 node_modules
 target
+dist
 node
 ref
 node_tmp

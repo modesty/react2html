@@ -7,9 +7,9 @@
 
 # THANKS
 
-    React.js, node.js, babel, webpack, SASS
+    React.js, node.js, babel, webpack, SASS, bootstrap
 
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    React.js, node.js, babel, webpack, SASS
+    Apache Server Configs, jQuery, Modernizr, Normalize.css
