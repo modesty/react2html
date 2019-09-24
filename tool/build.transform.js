@@ -15,65 +15,16 @@ function appendGATrackCode(content) {
 	return content.slice(0, content.lastIndexOf(pageEnds)) + gaCode + pageEnds;
 }
 
-//invalidate cached files to enable auto-recompile then reload
-//http://stackoverflow.com/questions/9210542/node-js-require-cache-possible-to-invalidate
-/**
- * Removes a module from the cache
- */
-function purgeCache(moduleName) {
-	// Traverse the cache looking for the files
-	// loaded by the specified module name
-	searchCache(moduleName, function (mod) {
-		delete require.cache[mod.id];
-	});
-
-	// Remove cached paths to the module.
-	// Thanks to @bentael for pointing this out.
-	Object.keys(module.constructor._pathCache).forEach(function(cacheKey) {
-		if (cacheKey.indexOf(moduleName)>0) {
-			delete module.constructor._pathCache[cacheKey];
-		}
-	});
-}
-
-/**
- * Traverses the cache to search for all the cached
- * files of the specified module name
- */
-function searchCache(moduleName, callback) {
-	// Resolve the module identified by the specified name
-	var mod = require.resolve(moduleName);
-
-	// Check if the module has been resolved and found within
-	// the cache
-	if (mod && ((mod = require.cache[mod]) !== undefined)) {
-		// Recursively go over the results
-		(function traverse(mod) {
-			// Go over each of the module's children and
-			// traverse them
-			mod.children.forEach(function (child) {
-				traverse(child);
-			});
-
-			// Call the specified callback providing the
-			// found cached module
-			callback(mod);
-		}(mod));
-	}
-}
-//end of invalidate cached files
-
-
 function outputOnePage(content, destFolder) {
 	mkdirp(destFolder, err => {
 		if (err) {
-			console.log('✗ Error: outputOnePage'.underline.maroon, err);
+			console.log('✗ Error: outputOnePage');
 		}
 		else {
-			let outPath = path.join(destFolder, "index.html");
-			let outStream = fs.createWriteStream(outPath);
+			const outPath = path.join(destFolder, "index.html");
+			const outStream = fs.createWriteStream(outPath);
 			outStream.once('open', () => {
-				outStream.write('<!doctype html>\r\n');
+				outStream.write('<!doctype html>');
 				outStream.write(appendGATrackCode(content));
 				outStream.end();
 			});
@@ -102,8 +53,6 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
 
     const file = path.join(srcFolder, pageFile);
 	let Component = require(file);
-	//delete require.cache[require.resolve(file)]; //force to invalidate the cache for changed file
-	purgeCache(file);
 
 	if (!Component) {
 		console.log(`✗ Error: No component found at ${file}`);

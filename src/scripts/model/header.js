@@ -1,7 +1,7 @@
 "use strict";
 
 const HeaderModel = {
-	homeLink: {name: "Home", href: "./", img: "images/logo.png"},
+	homeLink: {name: "Home", href: "./", img: "img/logo.png"},
 	bannerLink: {name: "Banner Ad", href: "", img: "http://placehold.it/420x60"},
 	socials:[
 		{id: "icon-facebook", href: "http://facebook.com"},
