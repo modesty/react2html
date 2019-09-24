@@ -1,5 +1,3 @@
-'use strict';
-
 /*global ga*/
 /*eslint no-undef: "error"*/
 

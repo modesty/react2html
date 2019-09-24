@@ -1,19 +1,15 @@
 "use strict";
 
-export default function processRelPath(rel, styles, scripts) {
-	let relPath = rel ? rel : "";
-	let touchHref = relPath + "apple-touch-icon.png";
+export default function processRelPath(rel = "", styles, scripts) {
+	const touchHref = rel + "apple-touch-icon.png";
+	const webMan = rel + "site.webmanifest";
 
 	if (!rel) {
-		return {touchHref, styleLinks: styles, scriptLinks: scripts};
+		return {touchHref, webMan, styleLinks: styles, scriptLinks: scripts};
 	}
 
-	let styleLinks = styles.map( s => {
-		return (s.indexOf('styles/') === 0) ? relPath + s : s;
-	});
-	let scriptLinks = scripts.map( s => {
-		return (s.indexOf('scripts/') === 0) ? relPath + s : s;
-	});
+	const styleLinks = styles.map(s => `${rel}css/${s}` );
+	const scriptLinks = scripts.map( s => `${rel}js/${s}`);
 
-	return {touchHref, styleLinks, scriptLinks};
+	return {touchHref, webMan, styleLinks, scriptLinks};
 }
