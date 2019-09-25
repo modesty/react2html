@@ -1,13 +1,9 @@
-"use strict";
-
-import path from 'path';
-
 import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import Conf from './base.config';
 
-const ENVs = {dev: 'development', prd: 'production', test: 'test'};
+const ENVs = {dev: 'development', prd: 'production', none: 'none'};
 
 const getPlugins = function(env) {
 	const GLOBALS = {
@@ -15,12 +11,9 @@ const getPlugins = function(env) {
 		__DEV__: env === ENVs.dev
 	};
 
-	const plugins = [
-		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.DefinePlugin(GLOBALS), //Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
-		new ExtractTextPlugin(Conf.target.css_bundle),
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin()
+	const plugins = [		
+		new webpack.DefinePlugin(GLOBALS),
+		new MiniCssExtractPlugin(Conf.target.css_bundle),
 	];
 
 	return plugins;
@@ -29,7 +22,7 @@ const getPlugins = function(env) {
 const getLoaders = function(env) {
 	const loaders = [
 		{test: /\.js$/, include: Conf.src.js_path, loaders: ['babel', 'eslint']},
-		{test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")}
+		{test: /(\.css|\.scss)$/, loader: MiniCssExtractPlugin.loader}
 	];
 
 	return loaders;
@@ -37,20 +30,18 @@ const getLoaders = function(env) {
 
 function getConfig(env) {
 	return {
-		debug: false,
-		cache: true,
-		devtool: env === ENVs.prd ? 'source-map' : 'eval', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
-		noInfo: true, // set to false to see a list of every file being bundled.
+		mode: env,
 		entry: Conf.src.js_entry,
-		target: env === ENVs.test ? 'node' : 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
 		output: {
-			path: Conf.target.js_path, // Note: Physical files are only output by the production build task `npm run build`.
+			path: Conf.target.js_path,
 			publicPath: '/',
 			filename: Conf.target.js_bundle
 		},
+		devtool: env === ENVs.prd ? 'cheap-module-source-map' : 'eval', 
+		target: 'web',
 		plugins: getPlugins(env),
 		module: {
-			loaders: getLoaders(env)
+			loader: getLoaders(env)
 		}
 	};
 }

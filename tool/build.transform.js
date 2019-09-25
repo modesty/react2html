@@ -8,14 +8,7 @@ import mkdirp from 'mkdirp';
 
 import Conf from './base.config';
 
-const gaCode = `<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '${Conf.TRACK_ID}', 'auto');ga('send', 'pageview');</script>`;
-const pageEnds = "</body></html>";
-
-function appendGATrackCode(content) {
-	return content.slice(0, content.lastIndexOf(pageEnds)) + gaCode + pageEnds;
-}
-
-function outputOnePage(content, destFolder) {
+function outputOnePage(htmlStream, destFolder) {
 	mkdirp(destFolder, err => {
 		if (err) {
 			console.log('✗ Error: outputOnePage');
@@ -25,8 +18,12 @@ function outputOnePage(content, destFolder) {
 			const outStream = fs.createWriteStream(outPath);
 			outStream.once('open', () => {
 				outStream.write('<!doctype html>');
-				outStream.write(appendGATrackCode(content));
+				htmlStream.pipe(outStream, {end: false});
+			});
+
+			htmlStream.on('end', () => {
 				outStream.end();
+				console.log(`✓ Success: transform page => ${path.relative(Conf.src.path, destFolder)}`);
 			});
 		}
 	});
@@ -59,18 +56,16 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
 		return;
 	}
 
-	if (Component.default) {
-		Component = Component.default;
-	}
+	Component = Component.default ? Component.default : Component;
 
 	let props = propFile ? require(path.join(srcFolder, propFile)) : {};
+	props = props.default ? props.default : props;
 
-	let html = ReactDOMServer.renderToStaticMarkup(
+	const htmlStream = ReactDOMServer.renderToStaticNodeStream(
 		React.createElement(Component, props)
 	);
 
-    outputOnePage(html, destFolder);
-    console.log(`✓ Success: transform page => ${path.relative(Conf.src.path, destFolder)}`);	
+    outputOnePage(htmlStream, destFolder);
 }
 
 function transformLinkedPage(filename) {
