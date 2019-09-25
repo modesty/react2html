@@ -2,7 +2,7 @@ import React from 'react';
 
 import processRelPath from '../model/head';
 
-const Head = ({title, description, styles, scripts, rel}) => {
+const Head = ({ title, description, styles, scripts, rel }) => {
 	const { touchHref, webMan, styleLinks, scriptLinks } = processRelPath(rel, styles, scripts);
 	return (
 		<head>

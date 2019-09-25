@@ -7,5 +7,6 @@ export default {
     description: pkg.description,
     scripts: glob.sync('**/*.js', { cwd: Conf.target.js_path }),
     styles: glob.sync('**/*.css', { cwd: Conf.target.css_path }),
-    rel: './'
+    rel: './',
+    gaKey: Conf.TRACK_ID
 }

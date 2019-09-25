@@ -1,6 +1,20 @@
 /*global ga*/
 /*eslint no-undef: "error"*/
 
+function createScriptTag(src = null, scriptBody = "") {
+	if (!src && !scriptBody)
+		return;
+	
+	const s = document.createElement('script');
+	s.async = true;
+	
+	if (!!src)
+		s.src = src;
+	else if (!!scriptBody)
+		s.innerHTML = scriptBody;
+    document.body.appendChild(s);
+}
+
 function getQueryStringParamByName(name, url) {
 	if (!url)
 		url = window.location.href;
@@ -27,7 +41,17 @@ function trackEvent(evtCategory, evtAction, evtLabel, evtValue) {
 	}
 }
 
+function createGAScript() {
+	const gaKey = document.body.dataset.track;
+	if (gaKey) {
+		createScriptTag('https://www.google-analytics.com/analytics.js');
+		createScriptTag(null, `window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+			ga('create', '${gaKey}', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview');`);
+	}
+}
+
 module.exports = {
 	getQueryStringParamByName,
-	trackEvent
+	trackEvent,
+	createGAScript
 };
