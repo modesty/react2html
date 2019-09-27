@@ -17,13 +17,13 @@ function streamCopy(files, srcFolder, destFolder, cb) {
 				}
 				else {
 					fs.createReadStream(inPath).pipe(fs.createWriteStream(outPath));
-					console.log("copied file: " + filename);
+					// console.log("copied file: " + filename);
 				}
 			});
 		}
 		else {
 			fs.createReadStream(inPath).pipe(fs.createWriteStream(outPath));
-			console.log("copied file: " + filename);
+			// console.log("copied file: " + filename);
 		}
 	});
 

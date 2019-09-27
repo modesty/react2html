@@ -77,24 +77,8 @@ function outputOnePage(htmlStream, destFolder) {
 	});
 }
 
-function parseAndPrepareDirs(pageFile, propFile, srcFolder, destFolder) {
-	let pathParts = pageFile.split(path.sep);
-	let relPath = "";
-	for (let i = 0; i < pathParts.length - 1; i++) {
-		relPath = relPath + path.sep + pathParts[i];
-		mkdirp(path.join(destFolder, relPath));
-	}
-
-	return {
-		pageFile: path.basename(pageFile),
-		propFile: propFile ? relPath + path.sep + propFile: null,
-		srcFolder: srcFolder + relPath,
-		destFolder: path.normalize( destFolder + relPath + path.sep + path.basename(pageFile, '.js') )
-	};
-}
-
 function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
-    console.log(`☯︎ start transform ${pageFile} ...`);
+	console.log(`☯︎ start transform ${pageFile} ...`);
 
     const file = path.join(srcFolder, pageFile);
 	let Component = require(file);
@@ -117,21 +101,15 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
     outputOnePage(htmlStream, destFolder);
 }
 
-function transformLinkedPage(filename) {
-	const {pageFile, propFile, srcFolder, destFolder} = parseAndPrepareDirs(filename,
-		null, Conf.src.js_path + "/pages", Conf.target.path);
-
-	transformOnePage(pageFile, propFile, srcFolder, destFolder);
-}
-
-function transformLinkedPages() {
-	glob("**/*.js", {cwd: Conf.src.js_path + "/pages"}, function(err, files) {
+function transformLinkedPages(dir, propDir, srcFolder, destFolder) {
+	const cwd = `${srcFolder}/${dir}`;
+	glob("**/*.js", {cwd}, (err, files) => {
 		if (err) {
-			console.log("✗ Error: transformLinkedPages".underline.maroon, err);
+			console.error("✗ Error: transformLinkedPages", err);
 		}
 		else {
-			files.forEach( filename => {
-				transformLinkedPage(filename);
+			files.forEach(filename => {
+				transformOnePage(filename, `../${propDir}/${dir}/${filename}`, `${srcFolder}/${dir}`, `${destFolder}/${path.basename(filename, '.js')}`);
 			});
 		}
 	});
@@ -139,6 +117,5 @@ function transformLinkedPages() {
 
 export default {
     transformOnePage,
-	transformLinkedPage,
 	transformLinkedPages
 };
