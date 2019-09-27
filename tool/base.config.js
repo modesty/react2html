@@ -8,8 +8,8 @@ const SRC_BASE = "/src";
 const TAR_BASE = "/target";
 const VENDOR_BASE = "/vendor";
 
-const CSS_BUNDLE_NAME = APP_NAME + "-bundle.css";
-const JS_BUNDLE_NAME = APP_NAME + "-bundle.js";
+const CSS_BUNDLE_NAME = APP_NAME + "-bundle.min.css";
+const JS_BUNDLE_NAME = APP_NAME + "-bundle.min.js";
 
 const Config = {
 	CUR_VER: pkg.version,

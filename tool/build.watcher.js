@@ -1,9 +1,7 @@
-'use strict';
-
 import fs from 'fs';
 import path from 'path';
+
 import watch from 'watch';
-import colors from 'colors';
 
 import Conf from './base.config';
 import helper from './base.copier';

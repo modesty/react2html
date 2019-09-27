@@ -2,6 +2,6 @@ import '../styles/main.scss'; //Yep, that's right. You can import SASS/CSS files
 
 import {createGAScript} from './client/util/browser.util';
 
-window.document.onload = function () {
+window.onload = function () {
 	createGAScript();
 };

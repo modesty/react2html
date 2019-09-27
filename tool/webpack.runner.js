@@ -27,27 +27,28 @@ let _post_compile_func = null;
 
 function compilerCallback(err, stats) {
 	if (err) { // so a fatal error occurred. Stop here.
-		console.log(`\n--- Webpack - ${Conf.TAR_BASE} - error: ${err}`.bold.red);
+		console.log(`\n--- Webpack - ${Conf.TAR_BASE} - error: ${err}`);
 		return 1;
 	}
 
-	let jsonStats = stats.toJson(statsOptions);
+	const jsonStats = stats.toJson(statsOptions);
 
 	if (jsonStats.errors.length > 0) {
-		jsonStats.errors.map(error => console.log(`✗ Error: Webpack - v${jsonStats.version} - : ${error}`.bold.red));
+		console.log(`✗ Error: Webpack - v${jsonStats.version} :`);
+		jsonStats.errors.map(error => console.log(error));
 		return 2;
 	}
 
 	if (jsonStats.warnings.length > 0) {
-		console.log('Webpack generated the following warnings: '.bold.yellow);
-		jsonStats.warnings.map(warning => console.log(warning.bold.yellow));
+		console.log(`⚕︎ Warning: Webpack - v${jsonStats.version} :`);
+		jsonStats.warnings.map(warning => console.log(warning));
 	}
 
-	console.log(`\n=== Webpack v${jsonStats.version} - ${jsonStats.hash} - ${jsonStats.time}ms\n`.green);
+	console.log(`\nWebpack v${jsonStats.version} - ${jsonStats.hash} - ${jsonStats.time}ms\n`);
 	jsonStats.assets.map( a => console.log(`${a.name}\t\tsize:${a.size}\tstatus:${a.emitted ? 'ok': 'error'}`));
 
 	// if we got this far, the build succeeded.
-	console.log(`\n=== Webpack v${jsonStats.version} - ${Conf.TAR_BASE} - success`.green.bold);
+	console.log(`\nSuccess: Webpack v${jsonStats.version} - ${Conf.TAR_BASE} - success`);
 	console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 
 	if ( typeof(_post_compile_func) === 'function' ) {
@@ -58,13 +59,13 @@ function compilerCallback(err, stats) {
 }
 
 function compileOnce() {
-	console.log('\n=== Generating minified bundle ...\n'.bold.blue);
+	console.log('\n=== Generating minified bundle ...\n');
 	const webpackConfig = webpackConfigBuilder('production');
 	webpack(webpackConfig).run(compilerCallback);
 }
 
 function watchCompile(callback) {
-	console.log('\n=== Watching and generating minified bundle ...'.bold.blue);
+	console.log('\n=== Watching and generating minified bundle ...');
 	_post_compile_func = callback;
 	const webpackConfigWatch = webpackConfigBuilder('development');
 	webpack(webpackConfigWatch).watch({aggregateTimeout: 10, poll: true}, compilerCallback);
