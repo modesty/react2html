@@ -16,7 +16,7 @@ function _getFileType(f) {
 	let retVal = 0;
 	let extName = path.extname( path.basename(f) );
 	if (!extName || extName.length < 2) {
-		console.log("ignore", path.basename(f));
+		console.info(`☯︎ ignore:`, path.basename(f));
 	}
 	else if (copyFileExt.test(extName)) {
 		retVal = 1;
@@ -66,51 +66,46 @@ function _handleRemovedFile(f) {
 		let relPath = _getRelativePath(f);
 		fs.unlink(path.join(Conf.target.path, relPath), (err) => {
 			if (err) {
-				console.log(`✗ Error: when deleting ${relPath}`, err);
+				console.error(`✗ Error: when deleting ${relPath}`, err);
 			}
 			else {
-				console.log(`file deleted: ${relPath}`);
+				console.info(`☯︎ File deleted: ${relPath}`);
 			}
 		});
 	}
 	else if (fileType === 1) {
-		console.error('index page should never be deleted.')
+		console.error('✗ Error: index page should never be deleted.')
 	}
 	else if (fileType === 2) {
 		let targetFile = path.basename(f, ".js") + ".html";
 		fs.unlink(path.join(Conf.target.path, targetFile), (err) => {
 			if (err) {
-				console.log(`✗ Error: when deleting ${targetFile}`, err);
+				console.error(`✗ Error: when deleting ${targetFile}`, err);
 			}
 			else {
-				console.log(`file deleted: ${targetFile}`);
+				console.info(`☯︎ File deleted: ${targetFile}`);
 			}
 		});
 	}
 }
 
-let _server_running = false;
 watch.watchTree(Conf.src.path, {
 	ignoreDotFiles: true,
 	ignoreUnreadableDir: true,
 	ignoreNotPermitted: true,
 	ignoreDirectoryPattern: /\/client\//i,
 	interval: 500
-}, function (f, curr, prev) {
+}, (f, curr, prev) => {
 	if (typeof f == "object" && prev === null && curr === null) {
-		console.log("watcher: finished walking the source tree".underline.magenta);
-		if (!_server_running) {
-			_server_running = true;
-			Runner.watchCompile(helper.startLiveServer);
-		}
+		console.log("☯︎ watcher: finished walking the source tree");
 	} else if (prev === null) {
-		console.log("\nwatcher: new file:", path.basename(f));
+		console.log("☯︎ watcher: new file:", path.basename(f));
 		_handleChangedFile(f);
 	} else if (curr.nlink === 0) {
-		console.log("\nwatcher: file removed:", path.basename(f));
+		console.log("☯︎ watcher: file removed:", path.basename(f));
 		_handleRemovedFile(f);
 	} else {
-		console.log("\nwatcher: file changed:", path.basename(f));
+		console.log("☯︎ watcher: file changed:", path.basename(f));
 		_handleChangedFile(f);
 	}
 });

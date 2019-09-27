@@ -54,8 +54,8 @@
     "build:asset": "babel-node ./tool/build.asset.js",
     "build:page": "babel-node ./tool/build.page.js",
     "build:bundle": "babel-node ./tool/build.bundle.js",
-    "build": "npm run clean:target; npm run build:asset; npm run build:bundle; npm run build:page;",
-    "build:prod": "webpack --mode production",
+    "build:water": "",
+    "build": "npm run clean:target; npm run build:asset; npm run build:bundle; npm run build:page;",    
     "start": "webpack-dev-server --open --mode development"
   }
 }
