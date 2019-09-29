@@ -1,3 +1,5 @@
+import path from 'path';
+
 const HeaderModel = {
 	homeLink: {name: "Home", href: "./", img: "img/logo.png"},
 	bannerLink: {name: "Banner Ad", href: "", img: "http://placehold.it/420x60"},
@@ -11,12 +13,7 @@ const HeaderModel = {
 	]
 };
 
-export default function processRelPath(rel) {
-	let relPath = rel ? rel : "";
-
-	let homeLink = HeaderModel.homeLink, bannerLink = HeaderModel.bannerLink;
-
-	homeLink = {...homeLink, href: relPath + homeLink.href, img: relPath + homeLink.img};
-
-	return {...HeaderModel, homeLink: homeLink};
+export default function processRelPath(rel = "") {
+	const { homeLink:preHomeLink } = HeaderModel;
+	return {...HeaderModel, homeLink: {...preHomeLink, href: path.join(rel, preHomeLink.href), img: path.join(rel, preHomeLink.img)}};
 }

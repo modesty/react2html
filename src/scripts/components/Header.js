@@ -4,9 +4,8 @@ import Menu from './Menu';
 
 import processRelPath from '../model/header';
 
-const Header = ({ title, rel }) => {
-	let dataModel = processRelPath(rel);
-	let {homeLink, bannerLink} = dataModel;
+const Header = ({ title, rel = "" }) => {
+	const { homeLink, bannerLink, socials } = processRelPath(rel);
 
 	return (
 		<header className='header'>
@@ -28,7 +27,7 @@ const Header = ({ title, rel }) => {
 				<div className="col-md-3 hidden-sm hidden-xs">
 					<div className="soc-area">
 						<div className="icons-social">
-							{dataModel.socials.map( s => <a href={s.href} className={s.id} key={s.id}></a>)}
+							{socials.map( s => <a href={s.href} className={s.id} key={s.id}></a>)}
 						</div>
 					</div>
 				</div>

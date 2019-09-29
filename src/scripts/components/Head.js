@@ -1,9 +1,6 @@
 import React from 'react';
 
-import processRelPath from '../model/head';
-
-const Head = ({ title, description, styles, scripts, rel }) => {
-	const { touchHref, webMan, styleLinks, scriptLinks } = processRelPath(rel, styles, scripts);
+const Head = ({ title, description, links, styles, scripts }) => {
 	return (
 		<head>
 			<meta charSet="utf-8" />		
@@ -11,11 +8,10 @@ const Head = ({ title, description, styles, scripts, rel }) => {
 			<meta name="description" content={description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-			<link rel="manifest" href={webMan} />
-			<link rel="apple-touch-icon" href={touchHref} />
+			{Object.entries(links).map((entry, i) => <link key={i} rel={entry[0]} href={entry[1]} />)}
+			{styles.map( (s, i) => <link rel="stylesheet" href={s} key={i} /> )}
+			{scripts.map((s, i) => <script src={s} key={i} />)}
 
-			{styleLinks.map( (s, i) => <link rel="stylesheet" href={s} key={i} /> )}
-			{scriptLinks.map((s, i) => <script src={s} key={i} />)}
 			<meta name="theme-color" content="#fafafa" />
 		</head>
 	);

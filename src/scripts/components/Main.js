@@ -1,8 +1,6 @@
-"use strict";
-
 import React from 'react';
 
-let Main = (props) =>
+const Main = (props) =>
 	<main className=''>
 		{props.children}
 	</main>;
