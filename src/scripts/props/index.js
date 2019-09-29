@@ -4,7 +4,7 @@ import glob from 'glob';
 const pkg = require('../../../package.json');
 import Conf from '../../../tool/base.config';
 
-export default {
+const chrome = {
     title: `Welcome to ${pkg.name} v${pkg.version}`,
     description: pkg.description,
     links: {
@@ -16,3 +16,9 @@ export default {
     rel: '',
     gaKey: Conf.TRACK_ID
 }
+
+const page = {
+
+};
+
+export default { chrome, page };
