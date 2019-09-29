@@ -5,10 +5,10 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
-const Root = ({title,description,scripts,styles,rel, gaKey}) => {
+const Root = ({title,description,links,scripts,styles,rel, gaKey}) => {
 	return (
 		<html className="no-js" lang="en">
-			<Head title={title} description={description} scripts={scripts} styles={styles} rel={rel} />
+			<Head title={title} description={description} links={links} scripts={scripts} styles={styles} rel={rel} />
 			<body data-track={gaKey} className='container'>
 				<Header title={title} />
 				<Main>
