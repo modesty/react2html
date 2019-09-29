@@ -21,7 +21,7 @@ const Config = {
 	src: {
 		path: CUR_DIR + SRC_BASE,
 		js_path: CUR_DIR + SRC_BASE + "/scripts",
-		js_entry: CUR_DIR + SRC_BASE + "/scripts/main.js",
+		js_entry: CUR_DIR + SRC_BASE + "/scripts/client/main.js",
 		sass_path: CUR_DIR + SRC_BASE + "/styles",
 		img_path: CUR_DIR + SRC_BASE + "/images",
 		vendor_css: CUR_DIR + VENDOR_BASE + "/css",

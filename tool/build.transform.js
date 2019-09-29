@@ -82,7 +82,7 @@ function transformOnePage(pageFile, propFile, srcFolder, destFolder) {
 
     const file = path.join(srcFolder, pageFile);
 	let Component = require(file);
-	//purgeCache(file);
+	purgeCache(file);
 
 	if (!Component) {
 		console.log(`✗ Error: No component found at ${file}`);
@@ -115,7 +115,18 @@ function transformLinkedPages(dir, propDir, srcFolder, destFolder) {
 	});
 }
 
+function transformRootIndex() {
+	transformOnePage('index.js', './props/index.js', Conf.src.js_path, Conf.target.path);	
+}
+
+function transformAllPages() {
+	transformRootIndex();
+	transformLinkedPages('pages', 'props', Conf.src.js_path, Conf.target.path);
+}
+
 export default {
     transformOnePage,
-	transformLinkedPages
+	transformLinkedPages,
+	transformRootIndex,
+	transformAllPages
 };

@@ -68,7 +68,7 @@ function watchCompile(callback) {
 	console.log('\n=== Watching and generating minified bundle ...');
 	_post_compile_func = callback;
 	const webpackConfigWatch = webpackConfigBuilder('development');
-	webpack(webpackConfigWatch).watch({aggregateTimeout: 10, poll: true}, compilerCallback);
+	webpack(webpackConfigWatch).watch({aggregateTimeout: 300, poll: true}, compilerCallback);
 }
 
 export default {

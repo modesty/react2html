@@ -12,7 +12,7 @@ const Contact = ({title,description,scripts,styles,rel, gaKey}) => {
 			<body data-track={gaKey} className='container'>
 				<Header title={title} />
 				<Main>
-					<h1>React2Html</h1>
+					<h1>Contact Me</h1>
 					<p>email the author: <a href="mailto:modestyz@hotmail.com?subject=About%20CoeProject%20Article">modestyz@hotmail.com</a></p>
 				</Main>
 				<Footer rel={rel} />

@@ -1,17 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 
-import watch from 'watch';
+import watch from 'node-watch';
 
 import Conf from './base.config';
-import helper from './base.copier';
+import copier from './base.copier';
+import helper from './build.transform';
 import Runner from './webpack.runner';
 
 const copyFileExt = /\.(gif|jpg|jpeg|svg|png|ico|xml|txt)$/i;
 const pageFileExt = /\.(js)$/i;
-const build_all_triggers = ['components/', 'issues/', 'model/'];
+const build_all_triggers = ['components/', 'issues/', 'model/', 'props/'];
 
+const fileTypes = ['ignore', 'asset file', 'index page file', 'linked page file', 'component file'];
 // 0: ignore; 1: asset file; 2: index page file; 3: linked page file; 4: component file
+
 function _getFileType(f) {
 	let retVal = 0;
 	let extName = path.extname( path.basename(f) );
@@ -41,22 +44,25 @@ function _getRelativePath(f) {
 }
 
 function _copyOneFile(f) {
-	let relPath = _getRelativePath(f);
-	helper.streamCopy([relPath], Conf.src.path, Conf.target.path, (err, files) => {
+	const relPath = _getRelativePath(f);
+	copier.streamCopy([relPath], Conf.src.path, Conf.target.path, (err, files) => {
 	});
 }
 
 function _handleChangedFile(f) {
-	let fileType = _getFileType(f);
-	console.log("fileType", fileType, f);
+	const fileType = _getFileType(f);
+	
+	const fileName = path.basename(f);
+	const relPath = path.relative(Conf.src.js_path, f);
+	const dir = path.dirname(relPath);
+	console.log(`☯︎ ${f} => fileType=${fileType}  fileName=${fileName}  relPath=${relPath}  dir=${dir}`);
+
 	switch (fileType) {
-		case 1:	_copyOneFile(f); break;
-		case 2: helper.transformDefaultPage(); break;
-		case 3: helper.transformLinkedPage(path.basename(f)); break;
-		case 4: {
-			helper.transformDefaultPage();
-			helper.transformLinkedPages();
-		} break;
+		case 1:	_copyOneFile(f); break; //new file
+		case 2: helper.transformOnePage(fileName, `./props/${fileName}`, Conf.src.js_path, Conf.target.path); break;
+		case 3: helper.transformOnePage(fileName, `../props/${dir}/${fileName}`, `${Conf.src.js_path}/${dir}`, `${Conf.target.path}/${path.basename(fileName, '.js')}`); break;
+		case 4: helper.transformAllPages(); break;
+		default: console.error('✗ Error: unrecognized file type', fileType); break;
 	}
 }
 
@@ -89,23 +95,24 @@ function _handleRemovedFile(f) {
 	}
 }
 
-watch.watchTree(Conf.src.path, {
-	ignoreDotFiles: true,
-	ignoreUnreadableDir: true,
-	ignoreNotPermitted: true,
-	ignoreDirectoryPattern: /\/client\//i,
-	interval: 500
-}, (f, curr, prev) => {
-	if (typeof f == "object" && prev === null && curr === null) {
-		console.log("☯︎ watcher: finished walking the source tree");
-	} else if (prev === null) {
-		console.log("☯︎ watcher: new file:", path.basename(f));
-		_handleChangedFile(f);
-	} else if (curr.nlink === 0) {
-		console.log("☯︎ watcher: file removed:", path.basename(f));
-		_handleRemovedFile(f);
-	} else {
-		console.log("☯︎ watcher: file changed:", path.basename(f));
-		_handleChangedFile(f);
-	}
-});
+function startWatchNonBundle() {
+	console.log(`☯︎ start to watch ...`);
+	watch(Conf.src.path, {
+		recursive: true,
+		filter: f => !/(\/client\/|\/styles\/)/i.test(f),
+		delay: 500
+	}, (evt, f) => {
+			console.log(`☯︎ watcher evt=${evt} name=${f}`);
+			if (evt === 'update') {
+				_handleChangedFile(f);
+			}
+			else if (evt === 'remove') {
+				_handleRemovedFile(f);
+			}
+			else {
+				console.error(`✗ Error: unrecognized event`, evt);	
+			}
+	});
+}
+
+Runner.watchCompile(startWatchNonBundle);

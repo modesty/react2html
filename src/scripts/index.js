@@ -14,7 +14,7 @@ const Root = ({title,description,scripts,styles,rel, gaKey}) => {
 				<Main>
 					<div className="row">
 						<aside>
-							<p>left side</p>
+							<p>Left Side</p>
 						</aside>
 						<section>
 							<p>Main content</p>
