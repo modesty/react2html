@@ -40,14 +40,13 @@
     "glob": "^7.1.4",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
+    "node-watch": "^0.6.3",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0",
     "sass-loader": "^8.0.0",
-    "watch": "^1.0.2",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.1"
+    "webpack-cli": "^3.3.9"
   },
   "scripts": {
     "clean:target": "babel-node ./tool/build.cleanup.js",
@@ -55,7 +54,7 @@
     "build:page": "babel-node ./tool/build.page.js",
     "build:bundle": "babel-node ./tool/build.bundle.js",
     "build:water": "",
-    "build": "npm run clean:target; npm run build:asset; npm run build:bundle; npm run build:page;",    
-    "start": "webpack-dev-server --open --mode development"
+    "build": "npm run clean:target; npm run build:asset; npm run build:bundle; npm run build:page;",
+    "start": "babel-node ./tool/build.watcher.js"
   }
 }

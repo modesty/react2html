@@ -13,7 +13,6 @@ const About = ({title,description,scripts,styles,rel, gaKey}) => {
 				<Header title={title} />
 				<Main>
 					<h1>About React2Html</h1>
-					<h1>About React2Html</h1>
 					<p>More details can be found at <a href="https://github.com/modesty/react2html"> GitHub </a></p>
 				</Main>
 				<Footer rel={rel} />
