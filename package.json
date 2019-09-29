@@ -42,8 +42,8 @@
     "node-sass": "^4.12.0",
     "node-watch": "^0.6.3",
     "prop-types": "^15.7.2",
-    "react": "^16.10.0",
-    "react-dom": "^16.10.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "sass-loader": "^8.0.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
@@ -53,8 +53,8 @@
     "build:asset": "babel-node ./tool/build.asset.js",
     "build:page": "babel-node ./tool/build.page.js",
     "build:bundle": "babel-node ./tool/build.bundle.js",
-    "build:water": "",
     "build": "npm run clean:target; npm run build:asset; npm run build:bundle; npm run build:page;",
+    "reset": "rm -rf node_modules/ && rm package-lock.json && npm i && npm run build",
     "start": "babel-node ./tool/build.watcher.js"
   }
 }

@@ -1,5 +1,3 @@
-"use strict";
-
 const HeaderModel = {
 	homeLink: {name: "Home", href: "./", img: "img/logo.png"},
 	bannerLink: {name: "Banner Ad", href: "", img: "http://placehold.it/420x60"},

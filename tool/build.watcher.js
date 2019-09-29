@@ -99,7 +99,7 @@ function startWatchNonBundle() {
 	console.log(`☯︎ start to watch ...`);
 	watch(Conf.src.path, {
 		recursive: true,
-		filter: f => !/(\/client\/|\/styles\/)/i.test(f),
+		filter: f => !/([/\\\\]client[/\\\\]|[/\\\\]styles[/\\\\])/gi.test(f),
 		delay: 500
 	}, (evt, f) => {
 			console.log(`☯︎ watcher evt=${evt} name=${f}`);
