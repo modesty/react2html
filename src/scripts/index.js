@@ -5,7 +5,7 @@ import Main from './components/Main';
 const Root = ({chrome, page}) => {
 	return (
 		<Main chrome={chrome} page={page} >
-			<div className="row">
+			<div>
 				<aside>
 					<p>Left Side</p>
 				</aside>

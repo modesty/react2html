@@ -19,5 +19,8 @@ export default {
         scripts: scripts.map(s => path.join(rel, s)),
         title: "Contact", description: "Contact Modesty Zhang"
     },
-    page
+    page: {
+        ...page,
+        date: new Date(2019, 8, 3, 0, 0, 0)
+    }
 }

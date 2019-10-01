@@ -1,7 +1,7 @@
 import path from 'path';
 
 const HeaderModel = {
-	homeLink: {name: "Home", href: "./", img: "img/logo.png"},
+	homeLink: {name: "Home", href: "./", img: "img/logo_wide.jpg"},
 	bannerLink: {name: "Banner Ad", href: "", img: "http://placehold.it/420x60"},
 	socials:[
 		{id: "icon-facebook", href: "http://facebook.com"},

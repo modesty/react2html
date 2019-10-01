@@ -18,7 +18,8 @@ const chrome = {
 }
 
 const page = {
-
+    author: "Modesty",
+    date: new Date(2019, 8, 1, 0, 0, 0)
 };
 
 export default { chrome, page };

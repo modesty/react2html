@@ -42,6 +42,10 @@ function copyVendorAsset() {
 	helper.copyWildCard('**/*.js', Conf.src.vendor_js, Conf.target.js_path, err => {
 		console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job}`);
 	});
+
+	helper.copyWildCard('**/*.*', Conf.src.vendor_font, Conf.target.font_path, err => {
+		console.log(err ? `✗ Error: ${job} \n ${err}` : `✓ Success: ${job}`);
+	});
 }
 
 function main() {
