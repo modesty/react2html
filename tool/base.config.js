@@ -23,13 +23,15 @@ const Config = {
 		sass_path: 	path.join(CUR_DIR, SRC_BASE, "styles"),
 		img_path: 	path.join(CUR_DIR, SRC_BASE, "images"),
 		vendor_css: path.join(CUR_DIR, VEN_BASE, "css"),
-		vendor_js:  path.join(CUR_DIR, VEN_BASE, "js")
+		vendor_js:  path.join(CUR_DIR, VEN_BASE, "js"),
+		vendor_font: path.join(CUR_DIR, VEN_BASE, "font")
 	},
 	target: {
 		path: 	  path.join(CUR_DIR, TAR_BASE),
 		js_path:  path.join(CUR_DIR, TAR_BASE, "js"),
 		css_path: path.join(CUR_DIR, TAR_BASE, "css"),
 		img_path: path.join(CUR_DIR, TAR_BASE, "img"),
+		font_path: path.join(CUR_DIR, TAR_BASE, "font"),
 		js_bundle: JS_BUNDLE_NAME,
 		css_bundle: `..${path.sep}css${path.sep}${CSS_BUNDLE_NAME}`
 	},

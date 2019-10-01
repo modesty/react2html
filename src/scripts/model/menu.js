@@ -1,4 +1,4 @@
-"use strict";
+import path from 'path';
 
 const MenuModel = [
 	{name: 'Home', href: "."},
@@ -32,11 +32,11 @@ export default function processRelPath(rel) {
 		}
 
 		return children.map( m => {
-			return {...m, href: relPath + m.href, children: transformChildren(m.children)};
+			return {...m, href: path.join(relPath, m.href), children: transformChildren(m.children)};
 		});
 	}
 
 	return MenuModel.map( m => {
-		return {...m, href: relPath + m.href, children: transformChildren(m.children)};
+		return {...m, href: path.join(relPath, m.href), children: transformChildren(m.children)};
 	});
 }

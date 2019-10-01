@@ -1,21 +1,13 @@
 @import "_vars";
 @import "_mixins";
 
-$top-bar-margin: 10px;
+$top-bar-margin: 15px;
 
 header {
 	background-color: transparent;
 
 	.logo {
 		margin: $top-bar-margin 0;
-
-		a {
-			font-size: 36px;
-		}
-
-		img {
-			width: 40px;
-		}
 	}
 
 	.banner-area {

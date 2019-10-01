@@ -8,13 +8,15 @@ const Main = props => {
 	const { chrome, page, children } = props;
 	const { rel, gaKey, title } = chrome;
 	return (
-		<html className="no-js" lang="en">
+		<html>
 			<Head {...chrome} />
-			<body data-track={gaKey} className='container'>
-				<Header title={title} rel={rel}/>
-				<main className='container'>
-					{React.cloneElement(children, page)}
-				</main>
+			<body data-track={gaKey}>
+				<article className='container'>
+					<Header title={title} page={page} rel={rel}/>
+					<main className='container'>
+						{React.cloneElement(children, page)}
+					</main>
+				</article>
 				<Footer rel={rel}/>
 			</body>
 		</html>
