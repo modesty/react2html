@@ -46,7 +46,7 @@
     "react-dom": "^16.10.1",
     "sass-loader": "^8.0.0",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "clean:target": "babel-node ./tool/build.cleanup.js",
